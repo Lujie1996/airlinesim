@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Company</title>
+    <link type="text/css" rel="stylesheet" href="/static/home_common.css">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+     <ul>
+        <li><a href="/home/mycompany/" class="active">My Company</a></li>
+        <li><a href="/home/finance/">Finance</a></li>
+        <li><a href="/home/flight/">Flight</a></li>
+        <li><a href="/home/plane/">Plane</a></li>
+        <li><a href="/home/airport/">Airport</a></li>
+        <li><a href="/home/ads/">Advertisement</a></li>
+    </ul>
+    <div class="container" align="center">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <h3>Basic Info</h3>
+                <table class="table" style="margin-top: 2em">
+                    <tbody>
+                        <tr>
+                            <td>Airline Name</td>
+                            <td>{{ airline_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Airline CEO</td>
+                            <td>{{ airline_ceo }}</td>
+                        </tr>
+                        <tr>
+                            <td>Start Time</td>
+                            <td>{{ start_time }}</td>
+                        </tr>
+                        <tr>
+                            <td>Location</td>
+                            <td>{{ location }}</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+        <h3>Statistics</h3>
+        <div class="row" style="margin-top: 3em">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-5">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Passenger Transported Total</td>
+                            <td>{{ passenger_transported_total }}</td>
+                        </tr>
+                         <tr>
+                            <td>Passenger Transported Last Month</td>
+                            <td>{{ passenger_transported_last_month }}</td>
+                        </tr>
+                         <tr>
+                            <td>Number of Flights</td>
+                            <td>{{ number_of_flights }}</td>
+                        </tr>
+                        <tr>
+                            <td>Number of Planes</td>
+                            <td>{{ number_of_planes }}</td>
+                        </tr>
+                        <tr>
+                            <td>Number of Airports</td>
+                            <td>{{ number_of_airports }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-5">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Profit Last Week</td>
+                            <td>{{ profit_last_week }}</td>
+                        </tr>
+                         <tr>
+                            <td>Profit Last Month</td>
+                            <td>{{ profit_last_month }}</td>
+                        </tr>
+                         <tr>
+                            <td>Most profitable Flight</td>
+                            <td>{{ most_profitable_flight }}</td>
+                        </tr>
+                        <tr>
+                            <td>Most Popular Flight</td>
+                            <td>{{ most_popular_flight }}</td>
+                        </tr>
+                        <tr>
+                            <td>Most Popular City</td>
+                            <td>{{ most_popular_city }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
