@@ -19,9 +19,8 @@ from . import functions
 
 urlpatterns = [
     path('', functions.index),
-    path('home/', functions.mycompany),
+    path('signin/', functions.signin),
     path('home/mycompany/', functions.mycompany),
+    path('home/flight/', functions.flight),
     path('admin/', admin.site.urls),
-    path('wordcount/', functions.wordcount),
-    path('wordcount/countresult/', functions.countresult),
 ]

@@ -5,36 +5,16 @@ def index(request):
     return render(request, 'index.html')
 
 
-def wordcount(request):
-    return render(request, 'wordcount.html')
-
-
-def countresult(request):
-    words = request.GET['usertext']
-    paras = dict()
-    paras['wordcount'] = len(words.split(' '))
-    paras['charactercount'] = len(words)
-    paras['usertext'] = words
-    word_count = dict()
-    for word in words:
-       if word not in word_count:
-           word_count[word] = 1
-       else:
-           word_count[word] += 1
-    sorted_wordcount = sorted(word_count.items(), key=lambda x: x[1], reverse=True)
-    paras['wordfreq'] = sorted_wordcount
-    return render(request, 'countresult.html', paras)
-
-
-def home(request):
-    id = request.POST['id']
-    psw = request.POST['password']
-    paras = dict()
-    paras['id'] = id
-    if id == 'lujie' and psw == '123456':
-        return render(request, 'home.html', paras)
+def signin(request):
+    if request.method == 'GET':
+        return render(request,'signin.html')
     else:
-        return redirect('/')
+        id = request.POST.get('id')
+        psw = request.POST.get('password')
+        if id == 'lujie' and psw == '123456':
+            return render(request, 'mycompany.html')
+        else:
+            return render(request, 'signin.html', {'msg': 'Username or Password incorrect'})
 
 
 def mycompany(request):
@@ -53,3 +33,7 @@ def mycompany(request):
     most_popular_flight = 'GK211'
     most_popular_city = 'RJTT, Tokyo Haneda Intl.'
     return render(request, 'mycompany.html', locals())
+
+
+def flight(request):
+    return render(request, 'flight.html', locals())

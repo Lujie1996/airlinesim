@@ -2,6 +2,12 @@
 <html>
 <head>
 	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        function signin() {
+            window.location.href = "/signin/"
+        }
+
+    </script>
 	<title>Airline CEO</title>
 </head>
 <body>
@@ -10,14 +16,15 @@
 			<h1>Welcome to Airline CEO!</h1>
 			<p>This is a airline simulation game where you can build up your own airline, managing your fleet and compete with other players.</p>
 		</div>
-		<div class="row" style="margin-top: 5em;">
-			<form method="POST" action="home/">
-                {% csrf_token %}
-				<input type="text" name="id" placeholder="ID">
-				<input type="password" name="password" placeholder="Password">
-				<input type="submit" value="Sign In">
-			</form>
-		</div>
+		<div class="row" style="margin-top: 8em">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-2">
+                <button id="signin" class="btn-default" style="width: 8em; height: 4em" onclick="signin()">Sign In</button>
+            </div>
+            <div class="col-lg-2">
+                <button id="signup" class="btn-default" style="width: 8em; height: 4em">Sign Up</button>
+            </div>
+        </div>
 	</div>
 </body>
 </html>
