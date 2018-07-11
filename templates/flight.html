@@ -4,71 +4,131 @@
     <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="/static/home_common.css">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <title>Flight</title>
+    <style rel="stylesheet" type="text/css">
+        #flight_table > thead > tr > th {
+            vertical-align: middle;
+        }
+    </style>
+    <script>
+        $().ready(function () {
+            $('.flight_no').click(function () {
+                console.log(this.text)
+                window.location.href = '/home/flight/?flight_no=' + this.text
+            })
+        })
+    </script>
 </head>
 <body>
-    <ul>
-        <li><a href="/home/mycompany/" class="active">My Company</a></li>
-        <li><a href="/home/finance/">Finance</a></li>
-        <li><a href="/home/flight/">Flight</a></li>
-        <li><a href="/home/plane/">Plane</a></li>
-        <li><a href="/home/airport/">Airport</a></li>
-        <li><a href="/home/ads/">Advertisement</a></li>
-    </ul>
+    <div id="nav">
+        <ul>
+            <li><a href="/home/mycompany/" class="active">My Company</a></li>
+            <li><a href="/home/finance/">Finance</a></li>
+            <li><a href="/home/flight/">Flight</a></li>
+            <li><a href="/home/plane/">Plane</a></li>
+            <li><a href="/home/airport/">Airport</a></li>
+            <li><a href="/home/ads/">Advertisement</a></li>
+        </ul>
+    </div>
+
     <div class="col-lg-offset-1 col-lg-10">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Flight#</th>
-                    <th>Route</th>
-                    <th>Week#</th>
-                    <th>Plane</th>
-                    <th>Price</th>
-                    <th>Load Rate</th>
-                    <th>Avg. Load Rate</th>
-                    <th>Profit</th>
-                </tr>
-            </thead>
+        <div>
+            <h1>Flight</h1>
+        </div>
 
-            <tbody>
-                <tr>
-                    <td rowspan="2">GK429</td>
-                    <td>RJTT - ZSHC</td>
-                    <td rowspan="2">1,2,3,4,5,6,7</td>
-                    <td>B787</td>
-                    <td>390 | 200 | 120</td>
-                    <td>76% | 92% | 99%</td>
-                    <td>94%</td>
-                    <td rowspan="2">$38,122</td>
-                </tr>
-                <tr>
-                    <td>12:20 - 15:30</td>
-                    <td>B-4533, B-4535</td>
-                    <td>120% | 110% | 90%</td>
-                    <td>3/5 | 10/12 | 198/220</td>
-                    <td>227</td>
-                </tr>
+        <div style="margin-top: 3em">
+            <div style="float: left;">
+                <h5 style="float: left">Sort By: </h5>
+            </div>
+            <div class="btn-group" style="margin-left: 1em; float: left;">
+                <button type="button" class="btn btn-default">Flight#</button>
+                <button type="button" class="btn btn-default">City</button>
+                <button type="button" class="btn btn-default">Load Rate</button>
+                <button type="button" class="btn btn-default">Profit</button>
+            </div>
+            <div style="float:right;">
+                <button type="button" class="btn btn-default"> + New Flight</button>
+            </div>
+        </div>
+        <div class="col-lg-12" style="padding: 0px; margin-top: 1em">
+            <table class="table table-bordered" id="flight_table">
+                <thead>
+                    <tr>
+                        <th rowspan="2">Flight#</th>
+                        <th rowspan="2">Airport<br/>City</th>
+                        <th rowspan="2">Time<br/>Week day</th>
+                        <th rowspan="2">Model<br/>Plane#</th>
+                        <th colspan="3">Price</th>
+                        <th colspan="3">Load Rate</th>
+                        <th rowspan="2">Avg. Load<br/>Rate</th>
+                        <th rowspan="2">Profit<br/>Last Week</th>
+                    </tr>
+                    <tr>
+                        <th>Fir.</th>
+                        <th>Bus.</th>
+                        <th>Eco.</th>
+                        <th>Fir.</th>
+                        <th>Bus.</th>
+                        <th>Eco.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2"><a class="flight_no" style="cursor: pointer">GK429</a></td>
+                        <td>RJTT - ZSHC</td>
+                        <td>12:20 - 15:30</td>
+                        <td>B787</td>
+                        <td>$390</td>
+                        <td>$200</td>
+                        <td>$120</td>
+                        <td>76%</td>
+                        <td>92%</td>
+                        <td>99%</td>
+                        <td rowspan="2">96%</td>
+                        <td rowspan="2">$38,122</td>
+                    </tr>
+                    <tr>
+                        <td>Tokyo - Hangzhou</td>
+                        <td>1,2,3,4,5,6,7</td>
+                        <td>B-4533, B-4535</td>
+                        <td>120%</td>
+                        <td>110%</td>
+                        <td>90%</td>
+                        <td>3/5</td>
+                        <td>10/12</td>
+                        <td>201/240</td>
+                    </tr>
 
-                <tr>
-                    <td rowspan="2">GK429</td>
-                    <td>RJTT - ZSHC</td>
-                    <td rowspan="2">1,2,3,4,5,6,7</td>
-                    <td>B787</td>
-                    <td>390 | 200 | 120</td>
-                    <td>76% | 92% | 99%</td>
-                    <td>94%</td>
-                    <td rowspan="2">$38,122</td>
-                </tr>
-                <tr>
-                    <td>12:20 - 15:30</td>
-                    <td>B-4533, B-4535</td>
-                    <td>120% | 110% | 90%</td>
-                    <td>3/5 | 10/12 | 198/220</td>
-                    <td>227</td>
-                </tr>
-            </tbody>
+{#                    <tr>#}
+{#                        <td rowspan="2">{{ flight_no }}</td>#}
+{#                        <td>{{ depart_arri_apt }}</td>#}
+{#                        <td>{{ depart_arri_time}}</td>#}
+{#                        <td>{{ plane_model }}</td>#}
+{#                        <td>{{ fir_price }}</td>#}
+{#                        <td>{{ bus_price }}</td>#}
+{#                        <td>{{ eco_price }}</td>#}
+{#                        <td>{{ fir_load_rate }}</td>#}
+{#                        <td>{{ bis_load_rate }}</td>#}
+{#                        <td>{{ eco_load_rate }}</td>#}
+{#                        <td rowspan="2">{{ avg_load_rate }}</td>#}
+{#                        <td rowspan="2">{{ profit_last_week }}</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <td>{{ depart_arri_city }}</td>#}
+{#                        <td>{{ week_day }}</td>#}
+{#                        <td>{{ plane_no }}</td>#}
+{#                        <td>{{ fir_price_ratio}}</td>#}
+{#                        <td>{{ bus_price_ratio }}</td>#}
+{#                        <td>{{ eco_price_ratio }}</td>#}
+{#                        <td>{{ fir_pass }}</td>#}
+{#                        <td>{{ bus_pass }}</td>#}
+{#                        <td>{{ eco_pass }}</td>#}
+{#                    </tr>#}
+                </tbody>
+            </table>
+        </div>
 
-        </table>
     </div>
 
 </body>

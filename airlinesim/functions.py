@@ -36,4 +36,10 @@ def mycompany(request):
 
 
 def flight(request):
-    return render(request, 'flight.html', locals())
+    flight_no = request.GET.get('flight_no')
+    if flight_no is None:
+        # Show all flights
+        return render(request, 'flight.html', locals())
+    else:
+        # Show this flight
+        return render(request, 'oneflight.html', locals())

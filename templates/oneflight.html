@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    <link type="text/css" rel="stylesheet" href="/static/home_common.css">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style type="text/css" rel="stylesheet">
+        table > tr > td{
+            vertical-align: middle;
+        }
+    </style>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=Agla4aScbJ0cZLFYwDtLMyUzLk8TDvLc3XFgM4hc_OfVFQVRHg-F1smElM0kAZvb'></script>
+    <script type='text/javascript'>
+        var map;
+        function loadMapScenario() {
+            map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                // locate canter in Pudong Airport
+                center: new Microsoft.Maps.Location(31.1511206294,121.8088509900),
+                zoom: 4});
+            var polyline = new Microsoft.Maps.Polyline([
+                new Microsoft.Maps.Location(30.2363630268,120.4384676377),
+                new Microsoft.Maps.Location(35.548698425293,139.747100830078),], null);
+            map.entities.push(polyline);
+            map.entities.push(polyline2);
+        }
+    </script>
+    <title>Flight GKXXX</title>
+</head>
+<body onload="loadMapScenario()">
+    <div id="nav">
+        <ul>
+            <li><a href="/home/mycompany/" class="active">My Company</a></li>
+            <li><a href="/home/finance/">Finance</a></li>
+            <li><a href="/home/flight/">Flight</a></li>
+            <li><a href="/home/plane/">Plane</a></li>
+            <li><a href="/home/airport/">Airport</a></li>
+            <li><a href="/home/ads/">Advertisement</a></li>
+        </ul>
+    </div>
+    <div class="col-lg-10 col-lg-offset-1" style="margin-top: 3em">
+        <div class="col-lg-12">
+            <h1 style="float:left;">{{ flight_no }}</h1>
+        </div>
+        <div class="col-lg-12" style="margin-top: 3em">
+            <button class="btn btn-default">Edit Flight</button>
+            <button class="btn btn-default">Round Trip</button>
+        </div>
+        <div class="col-lg-4" style="margin-top: 1em">
+            <table class="table">
+                <tr>
+                    <td><span style="font-size: large">ZSHC</span></td>
+                    <td><span style="font-size: large">RJTT</span></td>
+                </tr>
+                <tr>
+                    <td><b>Hangzhou</b></td>
+                    <td><b>Tokyo</b></td>
+                </tr>
+                <tr>
+                    <td><b>12:30</b></td>
+                    <td><b>15:50</b></td>
+                </tr>
+                <tr>
+                    <td colspan="2">Mon / Tues / Wed / Thur / Fri / Sat / Sun</td>
+                </tr>
+                <tr>
+                    <td>Distance</td>
+                    <td><b>3420 nm</b></td>
+                </tr>
+                <tr>
+                    <td>Duration</td>
+                    <td><b>3 h 24 min</b></td>
+                </tr>
+            </table>
+
+        </div>
+        <div class="col-lg-8">
+            <div id="myMap" style="width: 80%; height: 400px;margin: auto; border: solid 2px"></div>
+        </div>
+    </div>
+</body>
+</html>
