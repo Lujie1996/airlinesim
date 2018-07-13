@@ -20,6 +20,7 @@ from . import functions
 urlpatterns = [
     path('', functions.index),
     path('signin/', functions.signin),
+    path('createairline/', functions.createairline),
     path('home/mycompany/', functions.mycompany),
     path('home/flight/', functions.flight),
     path('admin/', admin.site.urls),

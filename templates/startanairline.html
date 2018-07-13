@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <title>Start an Airline</title>
+</head>
+<body>
+    <div class="container" style="margin-left: 10%; width: 80%;">
+        <!-- Page Title -->
+        <div class="row" style="margin-top: 3em;">
+            <div class="col-lg-12">
+                <h1>Start an Airline</h1>
+            </div>
+        </div>
+
+         <!--Airline CEO - Your Details-->
+        <div class="row" style="margin-top: 2em; border: 1px solid #c9d9e8; border-radius: 5px; box-shadow: 0px 0px 10px 0px #668ba8; padding: 5px;">
+            <div class="col-lg-12"  >
+                <h4>Airline CEO - Your Details</h4>
+            </div>
+
+            <div class="col-lg-12" style="border: 1px solid #d1deef; border-radius: 3px; padding: 0px;">
+                <table class="table table-bordered" style="margin: 0;">
+                    <tr>
+                        <td colspan="2" style="text-align: center">
+                            You will be the CEO of the new airline and you will invest your personal wealth in this new company.
+                            <br>Depending on the details and base airport of your airline you may also receive outside investors to boost your initial capital.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Airline CEO</td>
+                        <td>GakkiMylove</td>
+
+                    </tr>
+                    <tr>
+                        <td>Your wealth</td>
+                        <td>21 210 000 USD</td>
+                    </tr>
+                    <tr>
+                        <td>Game year</td>
+                        <td>2019 <span>(Speed: 25mins per game day)</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <form method="POST" action="/createairline/">
+            {% csrf_token %}
+
+             <!-- Basic Info -->
+            <div class="row" style="margin-top: 2em; border: 1px solid #c9d9e8; border-radius: 5px; box-shadow: 0px 0px 10px 0px #668ba8; padding: 5px;">
+                <div class="col-lg-12">
+                    <h4>Basic Information</h4>
+                </div>
+
+                <div class="col-lg-12" style="border: 1px solid #d1deef; border-radius: 3px; padding: 0px;">
+                    <table class="table table-bordered" style="margin: 0;">
+                        <tr>
+                            <td style="width: 20%;">Airline Name</td>
+                            <td>
+                                <input type="text" class="form-control" name="airlinename" style="width: 300px; height: 25px;" placeholder="Airline name (no special characters allowed)">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Airline 3-letter ICAO code<br/><span style="font-size: smaller; color: #888;">3 letters (AAA)</span></td>
+                            <td>
+                                <input type="text" class="form-control" name="airlineicao" style="width: 100px; height: 25px;" placeholder="AAA">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Airline 2-letter IATA code <br/><span style="font-size: smaller; color: #888;">2 Letters or letter & number (AA or A1)</span></td>
+                            <td>
+                                <input type="text" class="form-control" name="airlineiata" style="width: 100px; height: 25px;" placeholder="AA">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Game world rules</td>
+                            <td>
+                                <input type="checkbox" id="advancedAgreeRules" name="agreerules" required="" tabindex="4"> I have read and agree to the <a href="#">Game world rules</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <h4>Rules regarding airline names</h4>
+                                <ol style="margin: 0;">
+                                    <li>Name of your airline cannot contain names of real world airlines, or any other trademarks.</li>
+                                    <li>The airline name may not be too similar to any real world airline (for example <i>EazyJet</i> is not approved).</li>
+                                    <li>Name must be appropriate for an airline and may not be offending</li>
+                                    <li>You are not allowed to use real world airline logos in the airline livery or logo.</li>
+                                    <li>Administration has the right to remove airlines not following these rules.</li>
+                                </ol>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+            <!-- Airline HQ -->
+            <div class="row" style="margin-top: 2em; border: 1px solid #c9d9e8; border-radius: 5px; box-shadow: 0px 0px 10px 0px #668ba8; padding: 5px;">
+                <div class="col-lg-12">
+                    <h4>Airline Headquarter</h4>
+                </div>
+                <div class="col-lg-12" style="border: 1px solid #d1deef; border-radius: 3px; padding: 0px;">
+                    <table class="table table-bordered" style="margin: 0;">
+                        <tr>
+                            <td style="width: 20%;">Airline home base<br/><span style="font-size: smaller; color: #888;">ICAO code (e.g. RJTT)</span></td>
+                            <td>
+                                <input type="text" class="form-control" name="airlinehomebase" style="width: 300px; height: 25px; float: left" placeholder="Airline home base ICAO">
+                                <a style="margin-left: 15px;" href="#">Search an airport</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <h4>Tips for selecting the home base</h4>
+                                <ol style="margin: 0;">
+                                    <li>All your flights must depart from your home airport.</li>
+                                    <li>Make sure the airport is large enough and has enough passengers.</li>
+                                    <li>Check also that there are no other (or only few) airlines based at the same airport.</li>
+                                    <li>Also check that the airport has enough free airport slots available.</li>
+                                </ol>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="row" style="padding-top: 2em; padding-bottom: 5em;" align="center">
+                <button class="btn btn-primary" type="submit" style="width: 200px;">Create airline</button>
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>

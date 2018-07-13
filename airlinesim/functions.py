@@ -11,10 +11,22 @@ def signin(request):
     else:
         id = request.POST.get('id')
         psw = request.POST.get('password')
+        HAS_AIRLINE = False
         if id == 'lujie' and psw == '123456':
-            return render(request, 'mycompany.html')
+            if HAS_AIRLINE:
+                # this account already has an airline
+                return render(request, 'mycompany.html')
+            else:
+                # this account does not have an airline
+                return render(request, 'startanairline.html')
         else:
             return render(request, 'signin.html', {'msg': 'Username or Password incorrect'})
+
+
+def createairline(request):
+    if request.method == 'POST':
+        print(request.POST)
+        return redirect('/home/mycompany/')
 
 
 def mycompany(request):

@@ -5,6 +5,7 @@
     <link type="text/css" rel="stylesheet" href="/static/home_common.css">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts-en.common.js"></script>
     <style type="text/css" rel="stylesheet">
         table > tr > td{
             vertical-align: middle;
@@ -12,8 +13,8 @@
     </style>
     <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=Agla4aScbJ0cZLFYwDtLMyUzLk8TDvLc3XFgM4hc_OfVFQVRHg-F1smElM0kAZvb'></script>
     <script type='text/javascript'>
-        var map;
         function loadMapScenario() {
+            var map;
             map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
                 // locate canter in Pudong Airport
                 center: new Microsoft.Maps.Location(31.1511206294,121.8088509900),
@@ -22,12 +23,103 @@
                 new Microsoft.Maps.Location(30.2363630268,120.4384676377),
                 new Microsoft.Maps.Location(35.548698425293,139.747100830078),], null);
             map.entities.push(polyline);
-            map.entities.push(polyline2);
+        }
+        function load_graph() {
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main'));
+
+            var option = {
+                tooltip : {
+                    trigger: 'item',
+                    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                color:['#245e35','#455ae1','#c832ff'],
+                legend: {
+                    data:['Economy','Business','First']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis : [
+                    {
+                        type : 'category',
+                        data : ['Mon.','Tues.','Wed.','Thur.','Fri.','Sat.','Sun.']
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value'
+                    }
+                ],
+                series : [
+                    {
+                        name:'Economy',
+                        type:'bar',
+                        stack: 'total_demand',
+                        data:[320, 332, 301, 334, 390, 330, 320]
+                    },
+                    {
+                        name:'Business',
+                        type:'bar',
+                        stack: 'total_demand',
+                        data:[120, 132, 101, 134, 90, 230, 210]
+                    },
+                    {
+                        name:'First',
+                        type:'bar',
+                        stack: 'total_demand',
+                        data:[22, 12, 11, 28, 29, 3, 30]
+                    },
+                    {
+                        name:'Economy',
+                        type:'bar',
+                        stack: 'total_supply',
+                        data:[150, 232, 201, 154, 190, 330, 410]
+                    },
+                    {
+                        name:'Business',
+                        type:'bar',
+                        stack: 'total_supply',
+                        data:[62, 58, 64, 26, 79, 16, 15],
+                    },
+                    {
+                        name:'First',
+                        type:'bar',
+                        stack: 'total_supply',
+                        data:[2, 8, 4, 6, 9, 16, 15],
+                    },
+                    {
+                        name:'Economy',
+                        type:'bar',
+                        stack: 'my_supply',
+                        data:[120, 22, 21, 104, 140, 120, 310]
+                    },
+                    {
+                        name:'Business',
+                        type:'bar',
+                        stack: 'my_supply',
+                        data:[42, 28, 14, 16, 49, 6, 5],
+                    },
+                    {
+                        name:'First',
+                        type:'bar',
+                        stack: 'my_supply',
+                        data:[1, 4, 1, 2, 2, 6, 5],
+                    },
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
         }
     </script>
     <title>Flight GKXXX</title>
 </head>
-<body onload="loadMapScenario()">
+<body onload="loadMapScenario(),load_graph()">
     <div id="nav">
         <ul>
             <li><a href="/home/mycompany/" class="active">My Company</a></li>
@@ -39,44 +131,123 @@
         </ul>
     </div>
     <div class="col-lg-10 col-lg-offset-1" style="margin-top: 3em">
-        <div class="col-lg-12">
-            <h1 style="float:left;">{{ flight_no }}</h1>
-        </div>
-        <div class="col-lg-12" style="margin-top: 3em">
-            <button class="btn btn-default">Edit Flight</button>
-            <button class="btn btn-default">Round Trip</button>
-        </div>
-        <div class="col-lg-4" style="margin-top: 1em">
-            <table class="table">
-                <tr>
-                    <td><span style="font-size: large">ZSHC</span></td>
-                    <td><span style="font-size: large">RJTT</span></td>
-                </tr>
-                <tr>
-                    <td><b>Hangzhou</b></td>
-                    <td><b>Tokyo</b></td>
-                </tr>
-                <tr>
-                    <td><b>12:30</b></td>
-                    <td><b>15:50</b></td>
-                </tr>
-                <tr>
-                    <td colspan="2">Mon / Tues / Wed / Thur / Fri / Sat / Sun</td>
-                </tr>
-                <tr>
-                    <td>Distance</td>
-                    <td><b>3420 nm</b></td>
-                </tr>
-                <tr>
-                    <td>Duration</td>
-                    <td><b>3 h 24 min</b></td>
-                </tr>
-            </table>
+        {# title and buttons #}
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 style="float:left;">{{ flight_no }}</h1>
+            </div>
 
+            <div class="col-lg-12" style="margin-top: 2em;">
+                <button class="btn btn-default">Edit Flight</button>
+                <button class="btn btn-default">Round Trip</button>
+            </div>
         </div>
-        <div class="col-lg-8">
-            <div id="myMap" style="width: 80%; height: 400px;margin: auto; border: solid 2px"></div>
+
+        {# Two tables and Flight Map #}
+        <div class="row"  style="margin-top: 2em">
+            <div class="col-lg-6">
+                <table class="table table-striped">
+                    <tr>
+                        <td><span style="font-size: large">ZSHC</span></td>
+                        <td><span style="font-size: large">RJTT</span></td>
+                    </tr>
+                    <tr>
+                        <td><b>HGH, Hangzhou China</b></td>
+                        <td><b>HND, Tokyo Japan</b></td>
+                    </tr>
+                    <tr>
+                        <td><b>12 : 30 pm</b></td>
+                        <td><b>15 : 50 pm</b></td>
+                    </tr>
+                </table>
+                <table class="table" style="margin-top: 2em;">
+                    <tr>
+                        <td>Flgiht Time</td>
+                        <td>3 h 45 min</td>
+                    </tr>
+                    <tr>
+                        <td>Weekday</td>
+                        <td>Mon. Tues. Wed. Thur. Fri. Sat. Sun.</td>
+                    </tr>
+                    <tr>
+                        <td>Distance</td>
+                        <td>3250 nm</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-6">
+                <div id="myMap" style="width: 100%; height: 350px;margin: auto; border: solid 2px"></div>
+            </div>
         </div>
+
+        {# Table: Plane and weekday #}
+        <div class="row" style="margin-top: 4em;">
+            <div class="col-lg-12">
+                <h3 >Planes at this Flight</h3>
+            </div>
+            <div class="col-lg-8">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Weekday</th>
+                            <th>Model</th>
+                            <th>Plane</th>
+                            <th>Age</th>
+                            <th>Capacity</th>
+                            <th>Load Rate</th>
+                            <th>Profit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mon.</td>
+                            <td>B787</td>
+                            <td>B-4432</td>
+                            <td>4.6 years</td>
+                            <td>320</td>
+                            <td>72%</td>
+                            <td>$2,456</td>
+                        </tr>
+                        <tr>
+                            <td>Mon.</td>
+                            <td>B787</td>
+                            <td>B-4432</td>
+                            <td>4.6 years</td>
+                            <td>320</td>
+                            <td>72%</td>
+                            <td>$2,456</td>
+                        </tr>
+                        <tr>
+                            <td>Mon.</td>
+                            <td>B787</td>
+                            <td>B-4432</td>
+                            <td>4.6 years</td>
+                            <td>320</td>
+                            <td>72%</td>
+                            <td>$2,456</td>
+                        </tr>
+                        <tr>
+                            <td>Mon.</td>
+                            <td>B787</td>
+                            <td>B-4432</td>
+                            <td>4.6 years</td>
+                            <td>320</td>
+                            <td>72%</td>
+                            <td>$2,456</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        {# Demand and Suppply #}
+        <div class="row" style="margin-top: 2em">
+            <div class="col-lg-12">
+                <h3>Market Demand and Supply on this Route</h3>
+            </div>
+            <div id="main" class="col-lg-8" style="height:400px;"></div>
+        </div>
+
     </div>
 </body>
 </html>
